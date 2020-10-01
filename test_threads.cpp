@@ -23,10 +23,17 @@ int main(int argc, char **argv) {
         if (rank==0) {
             int number = tag+10;
             MPI_Send(&number, 1, MPI_INT, 1, tag, MPI_COMM_WORLD);
-        } else {
+        } else if (rank == 1) {
             int number;
             MPI_Recv(&number, 1, MPI_INT, 0, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
             printf("thread %d received number %d\n", tag, number);
+        } else if (rank % 2 == 0) {
+            int number = rank;
+            MPI_Send(&number, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
+        } else {
+            //int number;
+            //MPI_Recv(&number, 1, MPI_INT, rank - 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            //printf("rank %d received number %d\n", rank, number);
         }
     };
 
