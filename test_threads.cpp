@@ -28,12 +28,12 @@ int main(int argc, char **argv) {
             MPI_Recv(&number, 1, MPI_INT, 0, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
             printf("thread %d received number %d\n", tag, number);
         } else if (rank % 2 == 0) {
-            int number = rank;
+            int number = tag;
             MPI_Send(&number, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
         } else {
-            //int number;
-            //MPI_Recv(&number, 1, MPI_INT, rank - 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            //printf("rank %d received number %d\n", rank, number);
+            int number;
+            MPI_Recv(&number, 1, MPI_INT, rank - 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            printf("thread %d of rank %d received number %d\n", tag, rank, number);
         }
     };
 
