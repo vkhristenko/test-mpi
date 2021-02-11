@@ -6,9 +6,9 @@ int main(int argc, char **argv) {
     std::cout << "hello world" << std::endl;
 
     // init
-    int provided;
-    MPI_Init_thread(nullptr, nullptr, MPI_THREAD_MULTIPLE, &provided);
-    assert(provided == MPI_THREAD_MULTIPLE);
+    //int provided;
+    //MPI_Init_thread(nullptr, nullptr, MPI_THREAD_MULTIPLE, &provided);
+    MPI_Init(nullptr, nullptr);
 
     int nprocs;
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
     if (rank % 2 == 0) {
         int number = rank;
         MPI_Send(&number, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
-    } else if (rank % 2 == 1) {
+    } else {
         int number;
         MPI_Recv(&number, 1, MPI_INT, rank - 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         printf("rank %d received number %d\n", rank, number);
