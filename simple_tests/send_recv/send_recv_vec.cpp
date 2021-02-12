@@ -51,7 +51,6 @@ void test_varying(int rank) {
 
     } else {
         
-        // this guy will receive a fixed number of values
         std::vector<int> values(NVALUES);
 
         // do recv
