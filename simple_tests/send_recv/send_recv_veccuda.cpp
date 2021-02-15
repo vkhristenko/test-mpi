@@ -6,7 +6,9 @@
 
 #include <mpi.h>
 
-#include <cuda.h>
+//#include "test_include.h"
+
+#include <cuda_runtime_api.h>
 
 constexpr unsigned int NVALUES = 10000u;
 
@@ -77,7 +79,7 @@ void test_varying(int rank) {
 
 
 int main(int argc, char **argv) {
-    std::cout << "hello world" << std::endl;
+    std::cout << "hello world from send_recv_veccuda" << std::endl;
 
     // init
     //int provided;
